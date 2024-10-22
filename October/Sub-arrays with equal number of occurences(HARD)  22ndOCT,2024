@@ -1,0 +1,59 @@
+int sameOccurrence(vector<int>& arr, int x, int y) {
+        // code here
+        unordered_map<int,int> mp;
+        mp[0]=1;
+        int n=arr.size();
+        int count=0,res=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]==x) count+=1;
+            else if(arr[i]==y) count-=1;
+            
+            res+=mp[count];
+            mp[count]++;
+        }
+        return res;
+        /*
+        arr[] = [1, 2, 1] , x = 4 , y = 6
+        
+        mp={(0:1)}
+        
+        1st step as 4,6 not there res=1,mp={(0:2)}
+        2nd step as 4,6 not there res=2+1(previously we got res=1 from there),mp={(0:3)}
+        3rd step as 4,6 not there res=3+2+1,map={(0:4)}
+        
+        That's the complete breakdown of how we get 6 here similarly can do for all other cases.
+        */
+    }
+
+/*
+Given an array arr[] and two integers say, x and y, find the number of sub-arrays in which the number of occurrences of x is equal to the number of occurrences of y.
+
+Examples:
+
+Input: arr[] = [1, 2, 1] , x= 1 , y = 2
+Output: 2
+Explanation: The possible sub-arrays have same equal number of occurrences of x and y are:
+1) [1, 2], x and y have same occurrence(1).
+2) [2, 1], x and y have same occurrence(1).
+
+
+Input: arr[] = [1, 2, 1] , x = 4 , y = 6
+Output: 6
+Explanation: The possible sub-arrays have same equal number of occurrences of x and y are:
+1) [1], x and y have same occurrence(0).
+2) [2], x and y have same occurrence(0).
+3) [1], x and y have same occurrence(0).
+4) [1, 2], x and y have same occurrence(0).
+5) [2, 1], x and y have same occurrence(0).
+6) [1, 2, 1], x and y have same occurrence(0).
+
+
+Input: arr[] = [1, 2, 1] , x= 1 , y = 4
+Output: 1
+Explanation: The possible sub-array have same equal number of occurrences of x and y is: [2], x and y have same occurrence(0)
+
+
+Constraints: 
+1 <= arr.size() <= 106
+1 <= arr[i], x, y<=106
+*/
