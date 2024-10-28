@@ -32,4 +32,6 @@ Constraints:
 1 <= arr.size() <= 103
 0 <= arr[i] <= 105
 
+
+So the logic here is that we sort the array and check backwards if i and j sum up to give k(which is going backwards).
 */
