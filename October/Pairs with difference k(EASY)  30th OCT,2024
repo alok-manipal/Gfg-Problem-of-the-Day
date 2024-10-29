@@ -1,0 +1,32 @@
+int countPairsWithDiffK(vector<int>& arr, int k) {
+        // code here
+        int n=arr.size(),count=0;
+        map<int,int> mp;
+        for(int i=0;i<n;i++){
+            if(mp.find(arr[i]+k)!=mp.end()) count+=mp[arr[i]+k];
+            if(mp.find(arr[i]-k)!=mp.end()) count+=mp[arr[i]-k];
+            mp[arr[i]]++;
+        } 
+        return count;
+    }
+
+/*
+Given an array arr[] of positive integers. Find the number of pairs of integers whose difference equals a given number k.
+Note: (a, b) and (b, a) are considered the same. Also, the same numbers at different indices are considered different.
+
+Examples:
+
+Input: arr[] = [1, 5, 3, 4, 2], k = 3
+Output: 2
+Explanation: There are 2 pairs with difference 3,the pairs are {1, 4} and {5, 2} 
+Input: arr[] = [8, 12, 16, 4, 0, 20], k = 4
+Output: 5
+Explanation: There are 5 pairs with difference 4, the pairs are {0, 4}, {4, 8}, {8, 12}, {12, 16} and {16, 20}.
+Constraints:
+1 <= arr.size() <= 106
+1 <= k <= 106
+1 <= arri <= 106
+
+
+The logic here is that (arr[i]+k) or (arr[i]-k) we want to see how many arr[i] is excatly greater(arr[i]+k) or lesser(arr[i]-k) are there.
+*/
