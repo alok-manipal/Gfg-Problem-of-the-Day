@@ -5,8 +5,8 @@ int getMinDiff(int k, vector<int> &arr) {
         int ans=arr[n-1]-arr[0];
     
         for(int i=0;i<=n-2;i++){
-        int l=max(arr[n-1]-k,arr[i]+k);
-        int s=min(arr[0]+k,arr[i+1]-k);    
+        int l=max(arr[n-1]-k,arr[i]+k); //so here lower the height of the tallest tower(arr[n-1]-k) or raise the height of the shorter one's(arr[i]+k) 
+        int s=min(arr[0]+k,arr[i+1]-k); //so here increase the height of the shortest tower(arr[0]+k) or lower the height of the towers(arr[i+1]-k)    
         ans=min(ans,l-s);
         }
         return ans;
