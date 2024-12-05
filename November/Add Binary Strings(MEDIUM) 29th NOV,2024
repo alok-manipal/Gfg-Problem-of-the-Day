@@ -1,0 +1,69 @@
+string trimZeros(string s1){
+        int i=0;
+        
+        while(i<s1.size() && s1[i]=='0') i++;
+        
+        if(i == s1.size()) return "0";
+        
+        return s1.substr(i);
+    }
+  
+    string addBinary(string& s1, string& s2) {
+        // your code here
+        int n=s1.size(),m=s2.size();
+        int carry=0,j=m-1;
+        if(n<m) return addBinary(s2,s1);
+        for(int i=n-1;i>=0;i--){
+            int bit1=s1[i]-'0';
+            int sum=bit1+carry;
+            
+            if(j>=0){
+                int bit2=s2[j]-'0';
+                sum+=bit2;
+                j--;
+            }
+            int bit=sum%2;
+            carry =sum/2;
+            
+            s1[i]=(char)(bit+'0');
+        }
+        if(carry>0){
+            s1='1'+s1;
+        }
+        return trimZeros(s1);
+
+}
+
+/*
+So our logic here is simple first we check the size of both the strings n=s1.size(),m=s2.size() if(n<m) return addBinary(s2,s1) //we place big size first then small
+
+then we go from back of str1 where we intlize bit1 = s1[i]-'0'; and int sum=bit1+carry;  
+
+then we proceed if(j>=0){ int bit2 = s2[j]-'0'; sum+=bit2;j--; } //(j has been inatilized in the begning itself as int j=m-1;) 
+
+then the int bit=sum%2; int carry = sum/2;//An ex on why bit=sum%2 and carry=sum/2 (if (1+1)mod2 == 0 and the carry (1+1)/2 = 1) 
+
+then s1[i] = (char)(bit+'0);
+
+then if(carry>0){ s1='1'+s1; } 
+
+then trimzeros(s1); in this we essentially remove any leadin zero's as we were asked to do so in the question refer the above code to understand it better.
+
+Q)Given two binary strings s1 and s2 consisting of only 0s and 1s. Find the resultant string after adding the two Binary Strings.
+Note: The input strings may contain leading zeros but the output string should not have any leading zeros.
+
+Input: s1 = "1101", s2 = "111"
+Output: 10100
+Explanation:
+ 1101
++ 111
+10100
+Input: s1 = "00100", s2 = "010"
+Output: 110
+Explanation: 
+  100
++  10
+  110
+Constraints:
+1 ≤s1.size(), s2.size()≤ 10^6
+*/
