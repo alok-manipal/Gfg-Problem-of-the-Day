@@ -1,0 +1,92 @@
+For Complete Explanation Refer this link its a very impt KMP(LPS largest Prefix or Suffix) 
+link:https://www.geeksforgeeks.org/batch/gfg-160-problems/track/string-gfg-160/video/Mjg0ODU%3D
+
+////////Brute Force Method///////////////
+bool areRotations(string &s1, string &s2) {
+        int n=s1.size();
+        for(int i=0;i<n;i++){
+            if(s1==s2) return true;
+            
+            char last=s1.back();
+            s1.pop_back();
+            s1=last+s1;
+        }
+        return false;
+}
+
+////////////Optimal Approach the impt algorithm KMP algorithm//////////////
+
+vector<int> computeLPSArray(string& pat){
+        int n=pat.size();
+        int len=0;
+        
+        vector<int> lps(n);
+        int i=1;
+        lps[0]=0;
+        
+        while(i<n){
+            if(pat[i] == pat[len]){
+                len++;
+                lps[i]=len;
+                i++;
+            }
+            else{
+                if(len!=0){
+                    len=lps[len-1];
+                }
+                else{
+                    lps[i]=0;
+                    i++;
+                }
+            }
+        }
+        return lps;
+    }
+    
+    bool areRotations(string &s1, string &s2) {
+        // Your code here
+        
+        string txt =s1+s1;
+        string pat=s2;
+        
+        int n=txt.size();
+        int m=pat.size();
+        
+        vector<int> lps = computeLPSArray(pat); 
+        
+        int i=0,j=0;
+        
+        while(i<n){
+            if(pat[j]==txt[i]){
+                i++;
+                j++;
+            }
+            if(j==m) return true;
+            
+            else if(i<n && pat[j]!=txt[i]){
+                if(j!=0) j=lps[j-1];
+                else i++;
+            }
+        }
+        return false;
+}
+
+/*
+You are given two strings of equal lengths, s1 and s2. The task is to check if s2 is a rotated version of the string s1.
+
+Note: The characters in the strings are in lowercase.
+
+Examples :
+
+Input: s1 = "abcd", s2 = "cdab"
+Output: true
+Explanation: After 2 right rotations, s1 will become equal to s2.
+Input: s1 = "aab", s2 = "aba"
+Output: true
+Explanation: After 1 left rotation, s1 will become equal to s2.
+Input: s1 = "abcd", s2 = "acbd"
+Output: false
+Explanation: Strings are not rotations of each other.
+Constraints:
+1 <= s1.size(), s2.size() <= 10^5
+*/
