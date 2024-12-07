@@ -1,0 +1,39 @@
+///////////////Brute Force Solution////////////////////
+
+bool isPalindrome(string& s,int i,int j){
+      while(i<j){
+          if(s[i]!=s[j]){
+             return false;
+          }
+          i++;
+          j--;
+      }
+      return true;
+  }
+  
+    int minChar(string& s) {
+        // Write your code here
+        int n=s.size();
+        int count=0;
+        int i=n-1;
+        while(i>=0 && !isPalindrome(s,0,i)){
+            i--;
+            count++;
+        }
+        return count;
+}
+
+/* 
+In the brute force solution we check if the 0th or the (n-1)th are a palindrome or not carefull we don't check for the entire string wether its palindrome or not 
+if not palindrome then i-- and count++ is done in the end when we reach the end we return the value of count.
+*/
+
+///////////////Optimal Solution///////////
+
+
+/*
+The approach here is that we take the string s put a "$" sign and then put the reverse string s(s=s+"$"+rev) 
+now we create the LPS array if the the first and last char match then if the last value of the lps array is is 1 means that the first and last of s is palindrome.
+
+So we return the (n-lps.back()) to tell us how many characters must be added to make it a palindrome.
+*/
