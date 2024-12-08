@@ -1,0 +1,17 @@
+///////Brute Force Method//////
+
+We just ensure that after sorting in descending order we increment the idx++ only if the citation[i]>i as the q) states 
+                            !!!!!!!!-->least H papers that have been cited at least H times.!!!!!!!!
+
+int hIndex(vector<int>& citations) {        
+        sort(citations.begin(),citations.end());
+        reverse(citations.begin(),citations.end());
+        int n=citations.size();
+        int i=0,idx=0;
+        while(i<n && citations[i]>i){
+            idx++;
+        }
+        return idx;
+}
+
+//////OPTIMAL APPROACH/////////////
